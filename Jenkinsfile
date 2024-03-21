@@ -6,7 +6,7 @@ pipeline {
         DOCKER_IMAGE = 'cithit/brunsojc'                                                                    //<------change this
         IMAGE_TAG = "build-${BUILD_NUMBER}"
         GITHUB_URL = 'https://github.com/brunsojc/225-lab3-5.git'                                          //<------change this
-        KUBECONFIG = credentials('brunsojc-test-credentials')                                                         //<------change this
+        KUBECONFIG = credentials('brunsojc-225')                                                         //<------change this
     }
 
     stages {
@@ -58,7 +58,6 @@ pipeline {
             steps {
                 script {
                     // Set up Kubernetes configuration using the specified KUBECONFIG
-                    def kubeConfig = readFile(KUBECONFIG)
                     //sh "ls -la"
                     sh "sed -i 's|${DOCKER_IMAGE}:latest|${DOCKER_IMAGE}:${IMAGE_TAG}|' deployment-prod.yaml"
                     sh "cd .."
